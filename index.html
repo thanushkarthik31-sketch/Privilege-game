@@ -29,6 +29,7 @@
         justify-content: center;
     }
 
+    /* BOARD */
     #board {
         display: grid;
         grid-template-columns: repeat(6, 60px);
@@ -68,7 +69,7 @@
     }
 
     .space-type {
-        font-size: 10px;
+        font-size: 9px;
         color: #e5e7eb;
     }
 
@@ -95,8 +96,9 @@
     .p2 { background: #3b82f6; }
     .p3 { background: #eab308; }
 
+    /* SIDEBAR */
     #sidebar {
-        width: 320px;
+        width: 360px;
         max-width: 100%;
         background: #020617;
         border-radius: 12px;
@@ -108,6 +110,15 @@
     #status {
         margin-bottom: 10px;
         font-size: 14px;
+    }
+
+    #last-roll {
+        margin-bottom: 10px;
+        padding: 6px;
+        background: #0f172a;
+        border-radius: 8px;
+        border: 1px solid #1f2937;
+        font-size: 13px;
     }
 
     #controls {
@@ -132,20 +143,7 @@
         cursor: default;
     }
 
-    #log {
-        background: #020617;
-        border-radius: 8px;
-        padding: 8px;
-        height: 200px;
-        overflow-y: auto;
-        font-size: 12px;
-        border: 1px solid #1f2937;
-    }
-
-    .log-entry {
-        margin-bottom: 4px;
-    }
-
+    /* HINTS */
     #hints {
         margin-top: 8px;
         font-size: 13px;
@@ -155,469 +153,1053 @@
         border: 1px solid #1f2937;
     }
 
-    #guess-area {
-        margin-top: 8px;
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        align-items: center;
+    #hint-digits {
+        margin-top: 4px;
+        font-family: monospace;
     }
 
-    #guess-input {
-        width: 80px;
+    #hint-texts {
+        margin-top: 4px;
+        font-size: 12px;
+    }
+
+    /* COLLAPSIBLE SPACE CODE GRID */
+    #spacecodes-container {
+        margin-top: 10px;
+        background: #030712;
+        border: 1px solid #1f2937;
+        border-radius: 8px;
+        padding: 6px;
+    }
+
+    #spacecodes-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    #spacecodes-grid {
+        margin-top: 8px;
+        display: none;
+        grid-template-columns: repeat(6, 50px);
+        grid-template-rows: repeat(5, 50px);
+        gap: 4px;
+    }
+
+    .spacecode-cell {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        background: #111827;
+        border: 1px solid #1f2937;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #e5e7eb;
+    }
+
+    .spacecode-index {
+        position: absolute;
+        top: 2px;
+        left: 4px;
+        font-size: 9px;
+        color: #6b7280;
+    }
+
+    .spacecode-known {
+        border-color: #38bdf8;
+        box-shadow: 0 0 6px rgba(56,189,248,0.5);
+    }
+
+    /* CHAT */
+    #chat {
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid #1f2937;
+        padding: 6px;
+        background: #030712;
+    }
+
+    #chat-title {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    #chat-log {
+        height: 120px;
+        overflow-y: auto;
+        font-size: 12px;
+        border-radius: 6px;
+        border: 1px solid #1f2937;
+        padding: 4px;
+        background: #020617;
+    }
+
+    .chat-entry {
+        margin-bottom: 3px;
+    }
+
+    #chat-input-area {
+        margin-top: 4px;
+        display: flex;
+        gap: 4px;
+    }
+
+    #chat-input {
+        flex: 1;
         padding: 4px;
         border-radius: 4px;
         border: 1px solid #4b5563;
         background: #020617;
         color: #e5e7eb;
+        font-size: 12px;
     }
 
-    #deck-buttons {
-        display: flex;
-        gap: 6px;
-        margin-top: 6px;
-        flex-wrap: wrap;
+    /* GAME LOG */
+    #log {
+        background: #020617;
+        border-radius: 8px;
+        padding: 8px;
+        height: 160px;
+        overflow-y: auto;
+        font-size: 12px;
+        border: 1px solid #1f2937;
+        margin-top: 8px;
     }
 
-    .deck-btn {
-        font-size: 11px;
-        padding: 4px 8px;
+    .log-entry {
+        margin-bottom: 4px;
     }
-
-    .deck-code { background: #22c55e; }
-    .deck-betrayal { background: #ef4444; }
-    .deck-wild { background: #a855f7; }
 
     #secret-debug {
         margin-top: 6px;
         font-size: 11px;
         color: #6b7280;
     }
+
+    /* DIRECTIONS OVERLAY */
+    #overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15,23,42,0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    #directions-modal {
+        width: 520px;
+        max-width: 95%;
+        background: #020617;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid #1f2937;
+        box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        font-size: 13px;
+    }
+
+    #directions-modal h2 {
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-size: 20px;
+    }
+
+    #directions-modal ul {
+        padding-left: 18px;
+        margin-top: 4px;
+        margin-bottom: 8px;
+    }
+
+    #directions-modal li {
+        margin-bottom: 4px;
+    }
+
+    #player-count-select {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    #player-count-select select {
+        background: #020617;
+        color: #e5e7eb;
+        border-radius: 4px;
+        border: 1px solid #4b5563;
+        padding: 4px;
+    }
+
+    #start-game-btn {
+        margin-top: 8px;
+    }
+
+    /* SPACE CODE GUESS POPUP */
+    #guess-popup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+    }
+
+    #guess-popup-box {
+        background: #020617;
+        border: 1px solid #1f2937;
+        border-radius: 12px;
+        padding: 16px;
+        width: 300px;
+        text-align: center;
+    }
+
+    #guess-popup-box h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .guess-btn {
+        width: 40px;
+        height: 40px;
+        margin: 4px;
+        font-size: 16px;
+        border-radius: 6px;
+        background: #1e3a8a;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
 <h1>Privilege & Betrayal – Code Race</h1>
+
 <div id="game">
     <div id="board"></div>
+
     <div id="sidebar">
         <div id="status"></div>
+
+        <div id="last-roll">Last roll: —</div>
+
         <div id="controls">
-            <button id="roll-btn">Roll Dice</button>
+            <button id="roll-btn" disabled>Roll Dice</button>
             <button id="end-turn-btn" disabled>End Turn</button>
-        </div>
-
-        <div id="guess-area">
-            <span>Guess (5 digits):</span>
-            <input id="guess-input" maxlength="5">
-            <button id="guess-btn" disabled>Submit Guess</button>
-        </div>
-
-        <div id="deck-buttons">
-            <button id="code-deck-btn" class="deck-btn deck-code" disabled>Draw Code Card</button>
-            <button id="betrayal-deck-btn" class="deck-btn deck-betrayal" disabled>Draw Betrayal Card</button>
-            <button id="wild-deck-btn" class="deck-btn deck-wild" disabled>Draw Wild Card</button>
         </div>
 
         <div id="hints">
             <strong>Known Code Hints:</strong>
-            <div id="hint-display"></div>
+            <div id="hint-digits"></div>
+            <div id="hint-texts"></div>
+        </div>
+
+        <div id="spacecodes-container">
+            <div id="spacecodes-header">
+                <span><strong>Known Space Codes</strong></span>
+                <button id="spacecodes-toggle">Show</button>
+            </div>
+            <div id="spacecodes-grid"></div>
+        </div>
+
+        <div id="chat">
+            <div id="chat-title">Player chat</div>
+            <div id="chat-log"></div>
+            <div id="chat-input-area">
+                <input id="chat-input" placeholder="Type a secret note...">
+                <button id="chat-send-btn">Send</button>
+            </div>
         </div>
 
         <div id="log"></div>
-        <div id="secret-debug">(Secret code is hidden)</div>
+        <div id="secret-debug">(Secret code hidden)</div>
+    </div>
+</div>
+
+<!-- Directions / setup overlay -->
+<div id="overlay">
+    <div id="directions-modal">
+        <h2>How to Play – Privilege & Betrayal</h2>
+        <p>You are racing around a 30‑space track, trying to crack a hidden 5‑digit code.</p>
+        <ul>
+            <li><strong>Goal:</strong> Be the first player to correctly guess the 5‑digit code.</li>
+            <li><strong>One roll per turn:</strong> Roll once, move, resolve the space, then end your turn.</li>
+            <li><strong>Guess spaces:</strong> Let you attempt the main code.</li>
+            <li><strong>Card spaces:</strong> Auto‑draw a random card.</li>
+            <li><strong>Connections:</strong> Every space has a hidden code (1–4). Guess wrong → move back 2.</li>
+            <li><strong>Private chat:</strong> Each player has secret notes only visible on their turn.</li>
+        </ul>
+
+        <div id="player-count-select">
+            <label for="player-count">Number of players: </label>
+            <select id="player-count">
+                <option value="2">2 players</option>
+                <option value="3">3 players</option>
+                <option value="4" selected>4 players</option>
+            </select>
+        </div>
+
+        <button id="start-game-btn">Start Game</button>
+    </div>
+</div>
+
+<!-- Space code guessing popup -->
+<div id="guess-popup">
+    <div id="guess-popup-box">
+        <h3>Space Code Challenge</h3>
+        <p>This space has a hidden code (1–4). Choose your guess:</p>
+        <div>
+            <button class="guess-btn" data-guess="1">1</button>
+            <button class="guess-btn" data-guess="2">2</button>
+            <button class="guess-btn" data-guess="3">3</button>
+            <button class="guess-btn" data-guess="4">4</button>
+        </div>
+   </div>
+</div>
+
+<!-- MAIN CODE KEYPAD POPUP -->
+<div id="maincode-popup" style="
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+">
+    <div style="
+        background: #020617;
+        border: 1px solid #1f2937;
+        border-radius: 12px;
+        padding: 16px;
+        width: 300px;
+        text-align: center;
+    ">
+        <h3>Enter the 5‑Digit Code</h3>
+        <div id="maincode-display" style="
+            font-size: 24px;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+        ">_ _ _ _ _</div>
+
+        <div>
+            <button class="maincode-btn" data-digit="1">1</button>
+            <button class="maincode-btn" data-digit="2">2</button>
+            <button class="maincode-btn" data-digit="3">3</button>
+            <button class="maincode-btn" data-digit="4">4</button>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <button id="maincode-clear">Clear</button>
+            <button id="maincode-submit">Submit</button>
+        </div>
     </div>
 </div>
 
 <script>
-(function() {
-    // --- GAME CONFIG ---
-    const NUM_SPACES = 30;
-    const NUM_PLAYERS = 4;
-    const guessSpaces = [0, 8, 15, 23]; // 4 guess spaces
-    const cardSpaces = [];              // will fill to 15 card spaces
-    const boardSpaces = [];             // type per index
+/* =========================
+   CORE GAME STATE
+   ========================= */
 
-    // --- STATE ---
-    let secretCode = generateSecretCode();
-    let knownDigits = [null, null, null, null, null]; // hints
-    let players = [];
-    let currentPlayer = 0;
-    let gameOver = false;
-    let skipTurn = [false, false, false, false];
+const NUM_SPACES = 30;
+const MAX_PLAYERS = 4;
 
-    // DOM refs
-    const boardEl = document.getElementById('board');
-    const statusEl = document.getElementById('status');
-    const logEl = document.getElementById('log');
-    const rollBtn = document.getElementById('roll-btn');
-    const endTurnBtn = document.getElementById('end-turn-btn');
-    const guessInput = document.getElementById('guess-input');
-    const guessBtn = document.getElementById('guess-btn');
-    const codeDeckBtn = document.getElementById('code-deck-btn');
-    const betrayalDeckBtn = document.getElementById('betrayal-deck-btn');
-    const wildDeckBtn = document.getElementById('wild-deck-btn');
-    const hintDisplay = document.getElementById('hint-display');
-    const secretDebug = document.getElementById('secret-debug');
+let players = [];
+let currentPlayerIndex = 0;
+let currentPlayer = null;
+let secretCode = [];          // 5-digit array, each 1–4
+let spaceCodes = [];          // length 30, each 1–4
+let gameStarted = false;
+let awaitingSpaceCodeGuess = false;
+let pendingSpaceIndex = null;
 
-    // --- INIT ---
-    initBoardTypes();
-    createBoard();
-    initPlayers();
-    updateBoard();
-    updateUI();
-    log("Game started. First to guess the 5-digit code wins.");
+/* =========================
+   DOM ELEMENTS
+   ========================= */
 
-    // Uncomment this line if you want to see the code while testing:
-    // secretDebug.textContent = "DEBUG – Secret code: " + secretCode;
+const boardEl = document.getElementById('board');
+const statusEl = document.getElementById('status');
+const lastRollEl = document.getElementById('last-roll');
+const rollBtn = document.getElementById('roll-btn');
+const endTurnBtn = document.getElementById('end-turn-btn');
+const hintsDigitsEl = document.getElementById('hint-digits');
+const hintsTextsEl = document.getElementById('hint-texts');
+const spacecodesContainerEl = document.getElementById('spacecodes-container');
+const spacecodesToggleBtn = document.getElementById('spacecodes-toggle');
+const spacecodesGridEl = document.getElementById('spacecodes-grid');
+const chatLogEl = document.getElementById('chat-log');
+const chatInputEl = document.getElementById('chat-input');
+const chatSendBtn = document.getElementById('chat-send-btn');
+const logEl = document.getElementById('log');
+const secretDebugEl = document.getElementById('secret-debug');
 
-    // --- EVENT LISTENERS ---
-    rollBtn.addEventListener('click', () => {
-        if (gameOver) return;
-        const p = currentPlayer;
-        if (skipTurn[p]) {
-            log(`Player ${p+1} was forced to skip this turn.`);
-            skipTurn[p] = false;
-            nextPlayer();
-            return;
-        }
-        const roll = Math.floor(Math.random() * 6) + 1;
-        log(`Player ${p+1} rolled a ${roll}.`);
-        movePlayer(p, roll);
-        handleLanding(p);
-        updateBoard();
-        updateUI();
-    });
+const overlayEl = document.getElementById('overlay');
+const startGameBtn = document.getElementById('start-game-btn');
+const playerCountSelect = document.getElementById('player-count');
 
-    endTurnBtn.addEventListener('click', () => {
-        if (gameOver) return;
-        nextPlayer();
-        updateUI();
-    });
+const guessPopupEl = document.getElementById('guess-popup');
+const guessButtons = document.querySelectorAll('.guess-btn');
 
-    guessBtn.addEventListener('click', () => {
-        if (gameOver) return;
-        const guess = guessInput.value.trim();
-        if (!/^\d{5}$/.test(guess)) {
-            alert("Enter exactly 5 digits.");
-            return;
-        }
-        handleGuess(currentPlayer, guess);
-        updateUI();
-    });
+const maincodePopup = document.getElementById('maincode-popup');
+const maincodeDisplay = document.getElementById('maincode-display');
+const maincodeBtns = document.querySelectorAll('.maincode-btn');
+const maincodeClear = document.getElementById('maincode-clear');
+const maincodeSubmit = document.getElementById('maincode-submit');
 
-    codeDeckBtn.addEventListener('click', () => drawFromDeck("code"));
-    betrayalDeckBtn.addEventListener('click', () => drawFromDeck("betrayal"));
-    wildDeckBtn.addEventListener('click', () => drawFromDeck("wild"));
+/* =========================
+   UTILS
+   ========================= */
 
-    // --- FUNCTIONS ---
+function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-    function generateSecretCode() {
-        // 5-digit code, digits 0-9, can repeat
-        let code = "";
-        for (let i = 0; i < 5; i++) {
-            code += Math.floor(Math.random() * 10);
-        }
-        return code;
+function log(message) {
+    const div = document.createElement('div');
+    div.className = 'log-entry';
+    div.textContent = message;
+    logEl.appendChild(div);
+    logEl.scrollTop = logEl.scrollHeight;
+}
+
+function updateStatus() {
+    statusEl.textContent = `Current player: Player ${currentPlayerIndex + 1}`;
+}
+
+/* =========================
+   SECRET CODE & SPACE CODES
+   ========================= */
+
+function generateSecretCode() {
+    secretCode = [];
+    for (let i = 0; i < 5; i++) {
+        secretCode.push(randInt(1, 4));
     }
+    secretDebugEl.textContent = `(Secret code: ${secretCode.join('')})`;
+}
 
-    function initBoardTypes() {
-        // Start with all neutral
-        for (let i = 0; i < NUM_SPACES; i++) {
-            boardSpaces[i] = "neutral";
-        }
-        // Mark guess spaces
-        guessSpaces.forEach(i => boardSpaces[i] = "guess");
-
-        // Choose 15 card spaces that are not guess spaces
-        const available = [];
-        for (let i = 0; i < NUM_SPACES; i++) {
-            if (!guessSpaces.includes(i)) available.push(i);
-        }
-        while (cardSpaces.length < 15 && available.length > 0) {
-            const idx = Math.floor(Math.random() * available.length);
-            const spaceIndex = available.splice(idx, 1)[0];
-            cardSpaces.push(spaceIndex);
-            boardSpaces[spaceIndex] = "card";
-        }
-
-        // Mark start visually
-        boardSpaces[0] = "start"; // also a guess space logically
+function generateSpaceCodes() {
+    spaceCodes = [];
+    for (let i = 0; i < NUM_SPACES; i++) {
+        spaceCodes.push(randInt(1, 4));
     }
+}
 
-    function createBoard() {
-        boardEl.innerHTML = "";
-        for (let i = 0; i < NUM_SPACES; i++) {
-            const div = document.createElement('div');
-            div.classList.add('space');
-            const type = boardSpaces[i];
-            if (type === "card") div.classList.add('card');
-            else if (guessSpaces.includes(i)) div.classList.add('guess');
-            else if (i === 0) div.classList.add('start');
-            else div.classList.add('neutral');
+/* =========================
+   PLAYERS
+   ========================= */
 
-            const idxSpan = document.createElement('div');
-            idxSpan.classList.add('space-index');
-            idxSpan.textContent = i;
-            div.appendChild(idxSpan);
-
-            const typeSpan = document.createElement('div');
-            typeSpan.classList.add('space-type');
-            if (i === 0) typeSpan.textContent = "START / GUESS";
-            else if (guessSpaces.includes(i)) typeSpan.textContent = "GUESS";
-            else if (boardSpaces[i] === "card") typeSpan.textContent = "CARD";
-            else typeSpan.textContent = "";
-            div.appendChild(typeSpan);
-
-            const playersDiv = document.createElement('div');
-            playersDiv.classList.add('players');
-            div.appendChild(playersDiv);
-
-            boardEl.appendChild(div);
-        }
-    }
-
-    function initPlayers() {
-        players = [];
-        for (let i = 0; i < NUM_PLAYERS; i++) {
-            players.push({ position: 0 });
-        }
-    }
-
-    function updateBoard() {
-        const spaces = boardEl.querySelectorAll('.space');
-        spaces.forEach(space => {
-            const playersDiv = space.querySelector('.players');
-            playersDiv.innerHTML = "";
-        });
-
-        players.forEach((p, idx) => {
-            const space = spaces[p.position];
-            const playersDiv = space.querySelector('.players');
-            const token = document.createElement('div');
-            token.classList.add('player-token', 'p' + idx);
-            playersDiv.appendChild(token);
+function createPlayers(count) {
+    players = [];
+    for (let i = 0; i < count; i++) {
+        players.push({
+            id: i,
+            position: 0,
+            knownDigits: [],
+            knownSpaceCodes: new Set(),
+            chatLog: [],
+            eliminated: false,
+            skip: false
         });
     }
+    currentPlayerIndex = 0;
+    currentPlayer = players[0];
+}
 
-    function updateUI() {
-        if (gameOver) {
-            rollBtn.disabled = true;
-            endTurnBtn.disabled = true;
-            guessBtn.disabled = true;
-            codeDeckBtn.disabled = true;
-            betrayalDeckBtn.disabled = true;
-            wildDeckBtn.disabled = true;
-            return;
-        }
+/* =========================
+   STARTING HINTS
+   ========================= */
 
-        statusEl.textContent = `Current Player: Player ${currentPlayer+1}`;
+function assignStartingHints() {
+    players.forEach(player => {
+        const pos = randInt(0, 4);
+        const value = secretCode[pos];
+        player.knownDigits.push({ position: pos, value });
 
-        const pos = players[currentPlayer].position;
-        const onGuess = guessSpaces.includes(pos);
-        const onCard = boardSpaces[pos] === "card";
+        const s1 = randInt(0, NUM_SPACES - 1);
+        const s2 = randInt(0, NUM_SPACES - 1);
+        player.knownSpaceCodes.add(s1);
+        player.knownSpaceCodes.add(s2);
+    });
+}
 
-        guessBtn.disabled = !onGuess;
-        guessInput.disabled = !onGuess;
+/* =========================
+   BOARD TYPES (RANDOMIZED)
+   ========================= */
 
-        codeDeckBtn.disabled = !onCard;
-        betrayalDeckBtn.disabled = !onCard;
-        wildDeckBtn.disabled = !onCard;
+function generateBoardTypes() {
+    const types = [];
 
-        endTurnBtn.disabled = false;
+    // 5 GUESS spaces
+    for (let i = 0; i < 5; i++) types.push('GUESS');
 
-        // Show known digits
-        hintDisplay.textContent = knownDigits
-            .map(d => d === null ? "?" : d)
-            .join(" ");
+    // 5 CARD spaces
+    for (let i = 0; i < 5; i++) types.push('CARD');
+
+    // Remaining spaces = MOVE
+    while (types.length < NUM_SPACES) types.push('MOVE');
+
+    // Shuffle
+    for (let i = types.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [types[i], types[j]] = [types[j], types[i]];
     }
 
-    function log(msg) {
+    // Force index 0 to be START
+    types[0] = 'START';
+
+    return types;
+}
+
+/* =========================
+   BOARD RENDERING
+   ========================= */
+
+function buildBoard() {
+    boardEl.innerHTML = '';
+
+    const boardTypes = generateBoardTypes();
+
+    for (let i = 0; i < NUM_SPACES; i++) {
+        const space = document.createElement('div');
+        space.className = 'space neutral';
+        space.dataset.index = i;
+
+        const idx = document.createElement('div');
+        idx.className = 'space-index';
+        idx.textContent = i + 1;
+        space.appendChild(idx);
+
+        const type = document.createElement('div');
+        type.className = 'space-type';
+
+        const t = boardTypes[i];
+        if (t === 'START') {
+            type.textContent = 'START';
+            space.classList.add('start');
+        } else if (t === 'GUESS') {
+            type.textContent = 'GUESS';
+            space.classList.add('guess');
+        } else if (t === 'CARD') {
+            type.textContent = 'CARD';
+            space.classList.add('card');
+        } else {
+            type.textContent = 'MOVE';
+        }
+
+        space.appendChild(type);
+
+        const playersDiv = document.createElement('div');
+        playersDiv.className = 'players';
+        space.appendChild(playersDiv);
+
+        boardEl.appendChild(space);
+    }
+}
+
+function renderPlayerTokens() {
+    const spaces = boardEl.querySelectorAll('.space');
+    spaces.forEach(space => {
+        const playersDiv = space.querySelector('.players');
+        playersDiv.innerHTML = '';
+    });
+
+    players.forEach(player => {
+        const spaceIndex = player.position;
+        const space = boardEl.querySelector(`.space[data-index="${spaceIndex}"]`);
+        if (!space) return;
+        const playersDiv = space.querySelector('.players');
+        const token = document.createElement('div');
+        token.className = `player-token p${player.id}`;
+        playersDiv.appendChild(token);
+    });
+}
+
+/* =========================
+   SPACE CODE GRID (SIDEBAR)
+   ========================= */
+
+function buildSpaceCodeGrid() {
+    spacecodesGridEl.innerHTML = '';
+    spacecodesGridEl.style.display = 'none';
+    for (let i = 0; i < NUM_SPACES; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'spacecode-cell';
+        cell.dataset.index = i;
+
+        const idx = document.createElement('div');
+        idx.className = 'spacecode-index';
+        idx.textContent = i + 1;
+        cell.appendChild(idx);
+
+        const val = document.createElement('div');
+        val.className = 'spacecode-value';
+        val.textContent = '?';
+        cell.appendChild(val);
+
+        spacecodesGridEl.appendChild(cell);
+    }
+}
+
+function updateSpaceCodeGridForCurrentPlayer() {
+    const cells = spacecodesGridEl.querySelectorAll('.spacecode-cell');
+    cells.forEach(cell => {
+        const idx = parseInt(cell.dataset.index, 10);
+        const valDiv = cell.querySelector('.spacecode-value');
+        if (currentPlayer.knownSpaceCodes.has(idx)) {
+            cell.classList.add('spacecode-known');
+            valDiv.textContent = spaceCodes[idx];
+        } else {
+            cell.classList.remove('spacecode-known');
+            valDiv.textContent = '?';
+        }
+    });
+}
+
+/* =========================
+   HINTS DISPLAY
+   ========================= */
+
+function updateHintsDisplay() {
+    hintsDigitsEl.innerHTML = '';
+    hintsTextsEl.innerHTML = '';
+
+    if (!currentPlayer) return;
+
+    const digitsLine = document.createElement('div');
+    digitsLine.textContent = 'Digits you know: ';
+    const known = Array(5).fill('?');
+    currentPlayer.knownDigits.forEach(d => {
+        known[d.position] = d.value;
+    });
+    const span = document.createElement('span');
+    span.textContent = known.join(' ');
+    digitsLine.appendChild(span);
+    hintsDigitsEl.appendChild(digitsLine);
+
+    const text = document.createElement('div');
+    text.textContent = 'Use your connections, cards, and guesses to uncover more.';
+    hintsTextsEl.appendChild(text);
+}
+
+/* =========================
+   CHAT
+   ========================= */
+
+function renderChat() {
+    chatLogEl.innerHTML = '';
+    if (!currentPlayer) return;
+    currentPlayer.chatLog.forEach(entry => {
         const div = document.createElement('div');
-        div.classList.add('log-entry');
-        div.textContent = msg;
-        logEl.appendChild(div);
-        logEl.scrollTop = logEl.scrollHeight;
+        div.className = 'chat-entry';
+        div.textContent = entry;
+        chatLogEl.appendChild(div);
+    });
+    chatLogEl.scrollTop = chatLogEl.scrollHeight;
+}
+
+function addChatMessage(msg) {
+    if (!currentPlayer) return;
+    if (!msg.trim()) return;
+    currentPlayer.chatLog.push(msg.trim());
+    renderChat();
+}
+
+/* =========================
+   TURN / DICE / MOVEMENT
+   ========================= */
+
+function startTurn() {
+    currentPlayer = players[currentPlayerIndex];
+
+    if (currentPlayer.skip) {
+        currentPlayer.skip = false;
+        log(`Player ${currentPlayerIndex + 1} skips their turn!`);
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+        startTurn();
+        return;
     }
 
-    function movePlayer(playerIndex, steps) {
-        let pos = players[playerIndex].position;
-        pos = (pos + steps) % NUM_SPACES;
-        players[playerIndex].position = pos;
+    updateStatus();
+    updateHintsDisplay();
+    updateSpaceCodeGridForCurrentPlayer();
+    renderChat();
+    rollBtn.disabled = false;
+    endTurnBtn.disabled = true;
+    lastRollEl.textContent = 'Last roll: —';
+}
+
+function endTurn() {
+    rollBtn.disabled = true;
+    endTurnBtn.disabled = true;
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+    startTurn();
+}
+
+function rollDice() {
+    const roll = randInt(1, 6);
+    lastRollEl.textContent = `Last roll: ${roll}`;
+    log(`Player ${currentPlayerIndex + 1} rolled a ${roll}.`);
+    moveCurrentPlayer(roll);
+    rollBtn.disabled = true;
+}
+
+function moveCurrentPlayer(steps) {
+    currentPlayer.position += steps;
+    if (currentPlayer.position >= NUM_SPACES) {
+        currentPlayer.position = NUM_SPACES - 1;
+    }
+    if (currentPlayer.position < 0) currentPlayer.position = 0;
+    renderPlayerTokens();
+    resolveSpace(currentPlayer.position);
+}
+
+/* =========================
+   SPACE CODE GUESS POPUP
+   ========================= */
+
+function handleSpaceCodeChallenge(index) {
+    if (currentPlayer.knownSpaceCodes.has(index)) {
+        log(`Player ${currentPlayerIndex + 1} already knows the code for space ${index + 1}.`);
+        endTurnBtn.disabled = false;
+        return;
     }
 
-    function handleLanding(playerIndex) {
-        const pos = players[playerIndex].position;
-        if (guessSpaces.includes(pos)) {
-            log(`Player ${playerIndex+1} landed on a GUESS space.`);
-        } else if (boardSpaces[pos] === "card") {
-            log(`Player ${playerIndex+1} landed on a CARD space. Choose a deck.`);
-        } else {
-            log(`Player ${playerIndex+1} landed on a neutral space.`);
-        }
+    awaitingSpaceCodeGuess = true;
+    pendingSpaceIndex = index;
+    guessPopupEl.style.display = 'flex';
+}
+
+function closeSpaceCodePopup() {
+    guessPopupEl.style.display = 'none';
+    awaitingSpaceCodeGuess = false;
+    pendingSpaceIndex = null;
+}
+
+function handleSpaceCodeGuess(value) {
+    if (!awaitingSpaceCodeGuess || pendingSpaceIndex === null) return;
+
+    const trueCode = spaceCodes[pendingSpaceIndex];
+    if (value === trueCode) {
+        log(`Player ${currentPlayerIndex + 1} guessed the space code correctly on space ${pendingSpaceIndex + 1}.`);
+        currentPlayer.knownSpaceCodes.add(pendingSpaceIndex);
+        updateSpaceCodeGridForCurrentPlayer();
+    } else {
+        log(`Player ${currentPlayerIndex + 1} guessed the space code wrong on space ${pendingSpaceIndex + 1} (guessed ${value}, was ${trueCode}). They move back 2 spaces.`);
+        currentPlayer.position -= 2;
+        if (currentPlayer.position < 0) currentPlayer.position = 0;
+        renderPlayerTokens();
     }
 
-    function handleGuess(playerIndex, guess) {
-        if (!guessSpaces.includes(players[playerIndex].position)) {
-            alert("You must be on a GUESS space to guess.");
-            return;
-        }
-        log(`Player ${playerIndex+1} guessed ${guess}.`);
-        if (guess === secretCode) {
-            log(`Player ${playerIndex+1} has cracked the code and wins!`);
-            alert(`Player ${playerIndex+1} wins! The code was ${secretCode}.`);
-            gameOver = true;
-            return;
-        } else {
-            // Give feedback: number of correct digits in correct place
-            let correctPlace = 0;
-            for (let i = 0; i < 5; i++) {
-                if (guess[i] === secretCode[i]) correctPlace++;
-            }
-            log(`Wrong code. ${correctPlace} digit(s) in the correct position.`);
-        }
+    closeSpaceCodePopup();
+    endTurnBtn.disabled = false;
+}
+
+/* =========================
+   COLLAPSIBLE GRID TOGGLE
+   ========================= */
+
+spacecodesToggleBtn.addEventListener('click', () => {
+    if (spacecodesGridEl.style.display === 'none' || spacecodesGridEl.style.display === '') {
+        spacecodesGridEl.style.display = 'grid';
+        spacecodesToggleBtn.textContent = 'Hide';
+    } else {
+        spacecodesGridEl.style.display = 'none';
+        spacecodesToggleBtn.textContent = 'Show';
     }
+});
 
-    // --- DECKS ---
+/* =========================
+   CHAT EVENTS
+   ========================= */
 
-    function drawFromDeck(deckType) {
-        if (gameOver) return;
-        const p = currentPlayer;
-        const pos = players[p].position;
-        if (boardSpaces[pos] !== "card") {
-            alert("You must be on a CARD space to draw.");
-            return;
-        }
+chatSendBtn.addEventListener('click', () => {
+    addChatMessage(chatInputEl.value);
+    chatInputEl.value = '';
+});
 
-        if (deckType === "wild") {
-            // Wild randomly chooses code or betrayal effect
-            deckType = Math.random() < 0.5 ? "code" : "betrayal";
-            log(`Player ${p+1} drew from the WILD deck → ${deckType.toUpperCase()} effect.`);
-        } else {
-            log(`Player ${p+1} drew from the ${deckType.toUpperCase()} deck.`);
-        }
-
-        if (deckType === "code") {
-            applyCodeCard(p);
-        } else if (deckType === "betrayal") {
-            applyBetrayalCard(p);
-        }
-
-        updateBoard();
-        updateUI();
+chatInputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        addChatMessage(chatInputEl.value);
+        chatInputEl.value = '';
     }
+});
 
-    function applyCodeCard(playerIndex) {
-        const effects = [
-            "reveal_digit",
-            "reveal_position_hint",
-            "reveal_random_two_positions",
-            "higher_lower_first_digit"
-        ];
-        const effect = effects[Math.floor(Math.random() * effects.length)];
+/* =========================
+   BUTTON EVENTS
+   ========================= */
 
-        if (effect === "reveal_digit") {
-            // reveal one random unknown digit
-            const unknown = [];
-            for (let i = 0; i < 5; i++) {
-                if (knownDigits[i] === null) unknown.push(i);
-            }
-            if (unknown.length === 0) {
-                log("Code card: All digits already known. No extra info.");
-                return;
-            }
-            const idx = unknown[Math.floor(Math.random() * unknown.length)];
-            knownDigits[idx] = secretCode[idx];
-            log(`Code card: Revealed digit at position ${idx+1}.`);
+rollBtn.addEventListener('click', () => {
+    if (!gameStarted) return;
+    rollDice();
+});
+
+endTurnBtn.addEventListener('click', () => {
+    if (!gameStarted) return;
+    endTurn();
+});
+
+/* =========================
+   GUESS POPUP BUTTONS (SPACE CODES 1–4)
+   ========================= */
+
+guessButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const guess = parseInt(btn.dataset.guess, 10);
+        handleSpaceCodeGuess(guess);
+    });
+});
+
+/* =========================
+   MYSTERY CARDS (FULLY FUNCTIONAL)
+   ========================= */
+
+const baseCards = [
+    { 
+        text: "Reveal 1 random space code", 
+        effect: () => {
+            const unknown = [...Array(NUM_SPACES).keys()].filter(i => !currentPlayer.knownSpaceCodes.has(i));
+            if (unknown.length === 0) return;
+            const pick = unknown[randInt(0, unknown.length - 1)];
+            currentPlayer.knownSpaceCodes.add(pick);
+            updateSpaceCodeGridForCurrentPlayer();
+            log(`Player ${currentPlayerIndex + 1} learned the code for space ${pick + 1}.`);
         }
+    },
 
-        if (effect === "reveal_position_hint") {
-            const pos = Math.floor(Math.random() * 5);
-            const digit = secretCode[pos];
-            log(`Code card: The digit at position ${pos+1} is ${digit} or very close.`);
+    { 
+        text: "Reveal 1 random digit of the main code", 
+        effect: () => {
+            const unknown = [0,1,2,3,4].filter(pos => !currentPlayer.knownDigits.some(d => d.position === pos));
+            if (unknown.length === 0) return;
+            const pos = unknown[randInt(0, unknown.length - 1)];
+            currentPlayer.knownDigits.push({ position: pos, value: secretCode[pos] });
+            updateHintsDisplay();
+            log(`Player ${currentPlayerIndex + 1} learned digit #${pos + 1} of the main code.`);
         }
+    },
 
-        if (effect === "reveal_random_two_positions") {
-            const indices = [0,1,2,3,4];
-            shuffle(indices);
-            const chosen = indices.slice(0,2);
-            chosen.forEach(i => knownDigits[i] = secretCode[i]);
-            log(`Code card: Revealed digits at positions ${chosen[0]+1} and ${chosen[1]+1}.`);
+    { 
+        text: "Move forward 2 spaces", 
+        effect: () => {
+            currentPlayer.position += 2;
+            if (currentPlayer.position >= NUM_SPACES) currentPlayer.position = NUM_SPACES - 1;
+            renderPlayerTokens();
+            log(`Player ${currentPlayerIndex + 1} moves forward 2 spaces.`);
+            resolveSpace(currentPlayer.position);
         }
+    },
 
-        if (effect === "higher_lower_first_digit") {
-            const first = parseInt(secretCode[0], 10);
-            const hint = first >= 5 ? "5 or higher" : "4 or lower";
-            log(`Code card: The first digit is ${hint}.`);
+    { 
+        text: "Move backward 1 space", 
+        effect: () => {
+            currentPlayer.position -= 1;
+            if (currentPlayer.position < 0) currentPlayer.position = 0;
+            renderPlayerTokens();
+            log(`Player ${currentPlayerIndex + 1} moves backward 1 space.`);
+            resolveSpace(currentPlayer.position);
         }
-    }
+    },
 
-    function applyBetrayalCard(playerIndex) {
-        const effects = [
-            "move_back",
-            "skip_next_turn",
-            "swap_with_leader",
-            "lose_hint"
-        ];
-        const effect = effects[Math.floor(Math.random() * effects.length)];
+    { 
+        text: "Jump to nearest GUESS space", 
+        effect: () => {
+            const pos = currentPlayer.position;
+            const guessSpaces = [];
 
-        if (effect === "move_back") {
-            const steps = Math.floor(Math.random() * 3) + 1; // 1–3
-            players[playerIndex].position =
-                (players[playerIndex].position - steps + NUM_SPACES) % NUM_SPACES;
-            log(`Betrayal card: Player ${playerIndex+1} moves back ${steps} space(s).`);
-        }
-
-        if (effect === "skip_next_turn") {
-            skipTurn[playerIndex] = true;
-            log(`Betrayal card: Player ${playerIndex+1} will skip their next turn.`);
-        }
-
-        if (effect === "swap_with_leader") {
-            let leader = 0;
-            let maxPos = players[0].position;
-            for (let i = 1; i < NUM_PLAYERS; i++) {
-                if (players[i].position > maxPos) {
-                    maxPos = players[i].position;
-                    leader = i;
+            const spaces = boardEl.querySelectorAll('.space');
+            spaces.forEach(space => {
+                const typeEl = space.querySelector('.space-type');
+                if (typeEl && typeEl.textContent === 'GUESS') {
+                    guessSpaces.push(parseInt(space.dataset.index, 10));
                 }
-            }
-            if (leader !== playerIndex) {
-                const temp = players[playerIndex].position;
-                players[playerIndex].position = players[leader].position;
-                players[leader].position = temp;
-                log(`Betrayal card: Player ${playerIndex+1} swaps positions with Player ${leader+1}.`);
-            } else {
-                log("Betrayal card: You are already in the lead. No effect.");
-            }
-        }
+            });
 
-        if (effect === "lose_hint") {
-            const known = [];
-            for (let i = 0; i < 5; i++) {
-                if (knownDigits[i] !== null) known.push(i);
-            }
-            if (known.length === 0) {
-                log("Betrayal card: No hints to lose.");
+            if (guessSpaces.length === 0) {
+                log("No GUESS spaces on the board.");
                 return;
             }
-            const idx = known[Math.floor(Math.random() * known.length)];
-            knownDigits[idx] = null;
-            log(`Betrayal card: One known digit (position ${idx+1}) has been lost.`);
+
+            const next = guessSpaces.find(i => i > pos);
+            currentPlayer.position = next ?? guessSpaces[guessSpaces.length - 1];
+
+            renderPlayerTokens();
+            log(`Player ${currentPlayerIndex + 1} jumps to a GUESS space.`);
+            resolveSpace(currentPlayer.position);
+        }
+    },
+
+    { 
+        text: "Skip your next turn", 
+        effect: () => {
+            currentPlayer.skip = true;
+            log(`Player ${currentPlayerIndex + 1} will skip their next turn.`);
         }
     }
+];
 
-    function nextPlayer() {
-        currentPlayer = (currentPlayer + 1) % NUM_PLAYERS;
-        log(`Now it's Player ${currentPlayer+1}'s turn.`);
+let mysteryCards = [];
+for (let i = 0; i < 5; i++) mysteryCards = mysteryCards.concat(baseCards);
+
+for (let i = mysteryCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [mysteryCards[i], mysteryCards[j]] = [mysteryCards[j], mysteryCards[i]];
+}
+
+function drawMysteryCard() {
+    const card = mysteryCards[randInt(0, mysteryCards.length - 1)];
+    log(`Mystery Card: ${card.text}`);
+    card.effect();
+}
+
+/* =========================
+   SPACE RESOLUTION (GUESS + CARD + MOVE)
+   ========================= */
+
+function resolveSpace(index) {
+    const space = boardEl.querySelector(`.space[data-index="${index}"]`);
+    if (!space) {
+        endTurnBtn.disabled = false;
+        return;
     }
+    const typeEl = space.querySelector('.space-type');
+    const type = typeEl ? typeEl.textContent : 'MOVE';
 
-    function shuffle(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i+1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
+    if (type === 'GUESS') {
+        log(`Player ${currentPlayerIndex + 1} may attempt the main code.`);
+        openMainCodePopup();
+        return;
+    } 
+    else if (type === 'CARD') {
+        log(`Player ${currentPlayerIndex + 1} drew a Mystery Card.`);
+        drawMysteryCard();
+        endTurnBtn.disabled = false;
+        return;
+    } 
+    else {
+        handleSpaceCodeChallenge(index);
+    }
+}
+
+/* =========================
+   MAIN CODE KEYPAD
+   ========================= */
+
+let mainCodeEntry = [];
+
+function openMainCodePopup() {
+    mainCodeEntry = [];
+    updateMainCodeDisplay();
+    maincodePopup.style.display = 'flex';
+}
+
+function closeMainCodePopup() {
+    maincodePopup.style.display = 'none';
+}
+
+function updateMainCodeDisplay() {
+    const shown = mainCodeEntry.map(n => n).join(' ');
+    const blanks = Array(5 - mainCodeEntry.length).fill('_').join(' ');
+    maincodeDisplay.textContent = shown + (shown && blanks ? ' ' : '') + blanks;
+}
+
+maincodeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (mainCodeEntry.length < 5) {
+            mainCodeEntry.push(parseInt(btn.dataset.digit));
+            updateMainCodeDisplay();
         }
+    });
+});
+
+maincodeClear.addEventListener('click', () => {
+    mainCodeEntry = [];
+    updateMainCodeDisplay();
+});
+
+maincodeSubmit.addEventListener('click', () => {
+    if (mainCodeEntry.length < 5) return;
+
+    const guess = mainCodeEntry.join('');
+    const actual = secretCode.join('');
+
+    if (guess === actual) {
+        closeMainCodePopup();
+        triggerWin();
+    } else {
+        log(`Player ${currentPlayerIndex + 1} guessed the main code incorrectly.`);
+        closeMainCodePopup();
+        endTurnBtn.disabled = false;
     }
-})();
+});
+
+/* =========================
+   WINNING SEQUENCE
+   ========================= */
+
+function triggerWin() {
+    log(`Player ${currentPlayerIndex + 1} cracked the code!`);
+
+    revealAllSpaceCodes();
+    revealFullSecretCode();
+
+    rollBtn.disabled = true;
+    endTurnBtn.disabled = true;
+
+    alert(`PLAYER ${currentPlayerIndex + 1} HAS CRACKED THE CODE!`);
+}
+
+function revealAllSpaceCodes() {
+    const cells = spacecodesGridEl.querySelectorAll('.spacecode-cell');
+    cells.forEach(cell => {
+        const idx = parseInt(cell.dataset.index);
+        const val = cell.querySelector('.spacecode-value');
+        val.textContent = spaceCodes[idx];
+        cell.classList.add('spacecode-known');
+    });
+    spacecodesGridEl.style.display = 'grid';
+    spacecodesToggleBtn.textContent = 'Hide';
+}
+
+function revealFullSecretCode() {
+    secretDebugEl.textContent = `Secret code: ${secretCode.join('')}`;
+}
+
+/* =========================
+   START GAME
+   ========================= */
+
+startGameBtn.addEventListener('click', () => {
+    const count = parseInt(playerCountSelect.value, 10);
+    if (isNaN(count) || count < 2 || count > MAX_PLAYERS) return;
+
+    generateSecretCode();
+    generateSpaceCodes();
+    createPlayers(count);
+    assignStartingHints();
+    buildBoard();
+    renderPlayerTokens();
+    buildSpaceCodeGrid();
+    updateSpaceCodeGridForCurrentPlayer();
+    updateHintsDisplay();
+    renderChat();
+    updateStatus();
+
+    overlayEl.style.display = 'none';
+    gameStarted = true;
+    startTurn();
+});
+
+/* =========================
+   INITIAL BUILD (BEFORE START)
+   ========================= */
+
+buildBoard();
+buildSpaceCodeGrid();
+updateStatus();
 </script>
+
 </body>
 </html>
