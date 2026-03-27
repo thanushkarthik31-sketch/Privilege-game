@@ -5,56 +5,265 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privilege Game</title>
     <style>
-        body { background-color: #020617; color: #ffffff; }
-        #help-widget { position: fixed; top: 10px; right: 10px; background-color: #0f172a; padding: 15px; border-radius: 10px; z-index: 1000; }
-        button { background-color: #38bdf8; color: #020617; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
-        .collapsible { cursor: pointer; }
-        .content { display: none; margin-top: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+            color: #ffffff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 30px; color: #38bdf8; font-size: 2.5em; }
+        
+        /* Main Game Grid */
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .space {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: bold;
+        }
+        
+        .space:hover { transform: scale(1.05); }
+        .space.START { background-color: #10b981; color: #000; border-color: #059669; }
+        .space.GUESS { background-color: #f59e0b; color: #000; border-color: #d97706; }
+        .space.CARD { background-color: #8b5cf6; color: #fff; border-color: #7c3aed; }
+        .space.MOVE { background-color: #ef4444; color: #fff; border-color: #dc2626; }
+        
+        /* Help Widget */
+        #help-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 0;
+            border-radius: 15px;
+            z-index: 1000;
+            width: 380px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border: 2px solid #38bdf8;
+        }
+        
+        #help-widget::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #help-widget::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        
+        #help-widget::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 4px;
+        }
+        
+        .help-header {
+            background: linear-gradient(90deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 13px 13px 0 0;
+        }
+        
+        .help-content { padding: 15px; }
+        
+        .help-section {
+            margin-bottom: 15px;
+            border-left: 4px solid #38bdf8;
+            padding-left: 10px;
+        }
+        
+        .help-section h3 {
+            color: #38bdf8;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .help-section p, .help-section li {
+            color: #e2e8f0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+        
+        .help-section ul {
+            margin-left: 15px;
+        }
+        
+        .qa-item {
+            background: rgba(56, 189, 248, 0.1);
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border-left: 3px solid #38bdf8;
+        }
+        
+        .qa-item strong { color: #38bdf8; }
+        .qa-item p { color: #cbd5e1; font-size: 0.9em; margin-top: 5px; }
+        
+        /* Main Content Area */
+        .info-section {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid #38bdf8;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-section h2 {
+            color: #38bdf8;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .info-section p {
+            color: #e2e8f0;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            #help-widget {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+                top: auto;
+                bottom: 20px;
+                max-height: 50vh;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div id="help-widget">
-        <button class="collapsible">Help</button>
-        <div class="content">
-            <h2>Game Overview</h2>
-            <p>This game is about...</p>
-            <h3>How to Play</h3>
-            <p>Follow these instructions...</p>
-            <h3>Space Types</h3>
-            <ul>
-                <li>START: ...</li>
-                <li>GUESS: ...</li>
-                <li>CARD: ...</li>
-                <li>MOVE: ...</li>
-            </ul>
-            <h3>Connections System</h3>
-            <p>Details about connections...</p>
-            <h3>Mystery Cards</h3>
-            <p>Information about mystery cards...</p>
-            <h3>Tips and Strategies</h3>
-            <p>Useful tips...</p>
-            <h3>Interactive Q&amp;A</h3>
-            <p>Ask your questions here...</p>
-            <h3>FAQ</h3>
-            <p>Common questions and answers...</p>
+    <div class="container">
+        <h1>🎮 Privilege Game</h1>
+        
+        <div class="info-section">
+            <h2>Welcome to the Privilege Game!</h2>
+            <p>This is an interactive educational game designed to help players understand social dynamics, privilege, and inequality through gameplay. Navigate through different spaces, complete challenges, and learn about real-world perspectives.</p>
+        </div>
+        
+        <div class="game-board">
+            <div class="space START">START</div>
+            <div class="space GUESS">GUESS</div>
+            <div class="space CARD">CARD</div>
+            <div class="space MOVE">MOVE</div>
+            <div class="space START">BEGIN</div>
+            <div class="space GUESS">CHOOSE</div>
+            <div class="space CARD">DRAW</div>
+            <div class="space MOVE">ADVANCE</div>
+        </div>
+        
+        <div class="info-section">
+            <h2>How to Play</h2>
+            <p><strong>1. START:</strong> Begin your journey by rolling dice and moving around the board.</p>
+            <p><strong>2. GUESS Spaces:</strong> Answer questions about privilege and social issues.</p>
+            <p><strong>3. CARD Spaces:</strong> Draw a mystery card to learn surprising facts.</p>
+            <p><strong>4. MOVE Spaces:</strong> Follow special instructions that may help or challenge your progress.</p>
         </div>
     </div>
-
+    
+    <!-- Help Widget -->
+    <div id="help-widget">
+        <div class="help-header">📚 Help & Guide</div>
+        <div class="help-content">
+            
+            <div class="help-section">
+                <h3>🎯 Space Types</h3>
+                <ul>
+                    <li><strong>START (Green):</strong> Beginning points where players enter the game</li>
+                    <li><strong>GUESS (Orange):</strong> Answer trivia questions to advance</li>
+                    <li><strong>CARD (Purple):</strong> Draw mystery cards with facts and scenarios</li>
+                    <li><strong>MOVE (Red):</strong> Special instructions - move forward, back, or swap positions</li>
+                </ul>
+            </div>
+            
+            <div class="help-section">
+                <h3>🔗 Connections System</h3>
+                <p>Players form connections by landing on the same spaces. These connections create bonds that can be used strategically for mutual support or challenge cards. Track your connections to unlock special abilities!</p>
+            </div>
+            
+            <div class="help-section">
+                <h3>🎴 Mystery Cards</h3>
+                <p>Mystery cards contain real-world scenarios, facts about privilege, and challenges. Some cards give you advantages, while others present difficult choices that reflect actual social issues.</p>
+            </div>
+            
+            <div class="help-section">
+                <h3>💡 Tips & Strategies</h3>
+                <ul>
+                    <li>Pay attention to patterns - they reveal game mechanics</li>
+                    <li>Build alliances with other players strategically</li>
+                    <li>Answer GUESS questions honestly for better understanding</li>
+                    <li>Learn from mystery cards - they teach real perspectives</li>
+                    <li>Reflection is key - think about what each scenario means</li>
+                </ul>
+            </div>
+            
+            <div class="help-section">
+                <h3>❓ Q&A - Frequently Asked Questions</h3>
+                
+                <div class="qa-item">
+                    <strong>Q: How do I win the game?</strong>
+                    <p>A: The goal is to reach the end of the board first, but the real victory is gaining understanding about privilege and social dynamics through the journey.</p>
+                </div>
+                
+                <div class="qa-item">
+                    <strong>Q: What if I land on a difficult card?</strong>
+                    <p>A: Difficult cards represent real-world challenges. Use them as opportunities to learn and discuss perspectives with other players.</p>
+                </div>
+                
+                <div class="qa-item">
+                    <strong>Q: Can I skip a GUESS space?</strong>
+                    <p>A: No, GUESS spaces are mandatory - they're designed to engage players with important topics.</p>
+                </div>
+                
+                <div class="qa-item">
+                    <strong>Q: Do I need to remember every card?</strong>
+                    <p>A: Not necessarily, but reviewing cards afterward helps reinforce learning.</p>
+                </div>
+                
+                <div class="qa-item">
+                    <strong>Q: How many players can play?</strong>
+                    <p>A: 2-6 players work best for meaningful interaction and discussion.</p>
+                </div>
+                
+                <div class="qa-item">
+                    <strong>Q: What's the purpose of MOVE spaces?</strong>
+                    <p>A: They represent unpredictable life events - some help, some hinder. They teach that life outcomes aren't always fair or deserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
-        var coll = document.getElementsByClassName("collapsible");
-        for (var i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
+        // Help widget scroll smooth behavior
+        document.getElementById('help-widget').addEventListener('wheel', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Space click handler
+        document.querySelectorAll('.space').forEach(space => {
+            space.addEventListener('click', function() {
+                alert('Landed on: ' + this.textContent + '\nRoll the dice to move!');
             });
-        }
+        });
+        
+        console.log('Privilege Game loaded successfully!');
     </script>
-
 </body>
 </html>
