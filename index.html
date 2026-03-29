@@ -386,9 +386,10 @@
         <div id="last-roll">Last roll: —</div>
 
         <div id="controls">
-            <button id="roll-btn" disabled>Roll Dice</button>
-            <button id="end-turn-btn" disabled>End Turn</button>
-        </div>
+    <button id="roll-btn" disabled>Roll Dice</button>
+    <button id="directions-btn">Directions</button>
+    <button id="end-turn-btn" disabled>End Turn</button>
+	</div>
 
         <div id="hints">
             <strong>Known Code Hints:</strong>
@@ -440,7 +441,7 @@
                 <option value="4" selected>4 players</option>
             </select>
         </div>
-
+	<button id="close-directions-btn">Close</button>
         <button id="start-game-btn">Start Game</button>
     </div>
 </div>
@@ -940,6 +941,25 @@ endTurnBtn.addEventListener('click', () => {
     if (!gameStarted) return;
     endTurn();
 });
+
+/* =========================
+   DIRECTIONS BUTTON
+   ========================= */
+
+const directionsBtn = document.getElementById('directions-btn');
+
+directionsBtn.addEventListener('click', () => {
+    overlayEl.style.display = 'flex';
+});
+/* =========================
+   CLOSE BUTTON
+   ========================= */
+const closeDirectionsBtn = document.getElementById('close-directions-btn');
+
+closeDirectionsBtn.addEventListener('click', () => {
+    overlayEl.style.display = 'none';
+});
+
 
 /* =========================
    GUESS POPUP BUTTONS (SPACE CODES 1–4)
